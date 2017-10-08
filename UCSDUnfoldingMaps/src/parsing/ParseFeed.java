@@ -168,11 +168,11 @@ public class ParseFeed {
 			
 			// pretty sure IATA/FAA is used in routes.dat
 			// get airport IATA/FAA code
-			if(!columns[4].equals("")) {
+			if(!columns[4].equals("\"\"")) {
 				point.putProperty("code", columns[4]);
 			}
 			// get airport ICAO code if no IATA
-			else if(!columns[5].equals("")) {
+			else if(!columns[5].equals("\"\"") && !columns[5].equals("\\N")) {
 				point.putProperty("code", columns[5]);
 			}
 			

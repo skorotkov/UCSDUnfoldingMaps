@@ -1,3 +1,4 @@
+
 package module3;
 
 //Java utilities libraries
@@ -41,7 +42,7 @@ public class EarthquakeCityMap extends PApplet {
 	public static final float THRESHOLD_LIGHT = 4;
 
 	/** This is where to find the local tiles, for working without an Internet connection */
-	public static String mbTilesString = "blankLight-1-3.mbtiles";
+	public static String mbTilesString = "cours/Course1StarterCode/UCSDUnfoldingMaps/data/blankLight-1-3.mbtiles";
 	
 	// The map
 	private UnfoldingMap map;
@@ -77,8 +78,8 @@ public class EarthquakeCityMap extends PApplet {
 	    // to create a new SimplePointMarker for each PointFeature in 
 	    // earthquakes.  Then add each new SimplePointMarker to the 
 	    // List markers (so that it will be added to the map in the line below)
-	    
-	    
+	    earthquakes.forEach(feature -> markers.add(createMarker(feature)));
+
 	    // Add the markers to the map so that they are displayed
 	    map.addMarkers(markers);
 	}
@@ -108,7 +109,9 @@ public class EarthquakeCityMap extends PApplet {
 		// Here is an example of how to use Processing's color method to generate 
 	    // an int that represents the color yellow.  
 	    int yellow = color(255, 255, 0);
-		
+		int blue = color(0, 0, 255);
+		int red = color(255, 0, 0);
+
 		// TODO (Step 4): Add code below to style the marker's size and color 
 	    // according to the magnitude of the earthquake.  
 	    // Don't forget about the constants THRESHOLD_MODERATE and 
@@ -116,7 +119,16 @@ public class EarthquakeCityMap extends PApplet {
 	    // Rather than comparing the magnitude to a number directly, compare 
 	    // the magnitude to these variables (and change their value in the code 
 	    // above if you want to change what you mean by "moderate" and "light")
-	    
+	    if(mag < THRESHOLD_LIGHT) {
+			marker.setColor(blue);
+//			marker.setRadius(10f);
+		} else if (mag < THRESHOLD_MODERATE) {
+			marker.setColor(yellow);
+			marker.setRadius(15f);
+		} else {
+			marker.setColor(red);
+			marker.setRadius(20f);
+		}
 	    
 	    // Finally return the marker
 	    return marker;

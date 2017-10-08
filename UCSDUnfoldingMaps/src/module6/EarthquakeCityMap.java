@@ -36,10 +36,10 @@ public class EarthquakeCityMap extends PApplet {
 	private static final long serialVersionUID = 1L;
 
 	// IF YOU ARE WORKING OFFILINE, change the value of this variable to true
-	private static final boolean offline = false;
+	private static final boolean offline = true;
 	
 	/** This is where to find the local tiles, for working without an Internet connection */
-	public static String mbTilesString = "blankLight-1-3.mbtiles";
+	public static String mbTilesString = "C:/home/work/coursera/java/Course1StarterCode/UCSDUnfoldingMaps/data/blankLight-1-3.mbtiles";
 	
 	
 
@@ -70,6 +70,7 @@ public class EarthquakeCityMap extends PApplet {
 		size(900, 700, OPENGL);
 		if (offline) {
 		    map = new UnfoldingMap(this, 200, 50, 650, 600, new MBTilesMapProvider(mbTilesString));
+//			earthquakesURL = "test2.atom";  // The same feed, but saved August 7, 2015
 		    earthquakesURL = "2.5_week.atom";  // The same feed, but saved August 7, 2015
 		}
 		else {
@@ -85,7 +86,7 @@ public class EarthquakeCityMap extends PApplet {
 		//earthquakesURL = "test2.atom";
 		
 		// Uncomment this line to take the quiz
-		//earthquakesURL = "quiz2.atom";
+		earthquakesURL = "quiz2.atom";
 		
 		
 		// (2) Reading in earthquake data and geometric properties
@@ -123,7 +124,8 @@ public class EarthquakeCityMap extends PApplet {
 	    //           for their geometric properties
 	    map.addMarkers(quakeMarkers);
 	    map.addMarkers(cityMarkers);
-	    
+
+	    sortAndPrint(100);
 	    
 	}  // End setup
 	
@@ -410,4 +412,9 @@ public class EarthquakeCityMap extends PApplet {
 		return false;
 	}
 
+	private void sortAndPrint(int numToPrint) {
+		Object[] arr = quakeMarkers.toArray();
+		Arrays.sort(arr);
+		Arrays.stream(arr).limit(numToPrint).forEach(System.out::println);
+	}
 }
